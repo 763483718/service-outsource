@@ -1,6 +1,6 @@
 import cv2 as cv
 import glob
-from sklearn.utils import shuffle
+# from sklearn.utils import shuffle
 import numpy as np
 
 
@@ -30,29 +30,56 @@ class dataSet(object):
         sleepCount = 0
         telephoneCount = 0
         studyCount = 0
-        for i in self._labels:
-            if i == 3:
+
+        for i in range(len(self._labels)):
+            label = self._labels[i]
+            if label == 0 or label == 3 or label == 6:
+                self._labels[i] = 0
                 sleepCount += 1
-            elif i == 4:
+            elif label == 1 or label == 4 or label == 7:
+                self._labels[i] = 1
                 telephoneCount += 1
             else:
+                self._labels[i] = 2
                 studyCount += 1
         print(sleepCount, telephoneCount, studyCount)
 
-        # print(self._labels)
-        # print(self._cls.shape)
-
-    @property
-    def images(self):
-        return self._images
-
-    @property
-    def labels(self):
-        return self._labels
-
-    @property
-    def cls(self):
-        return self._cls
+    def Expansion(self, img, label, size=200, pan=10):
+        black_img = np.zeros(size*size*3,dtype=np.uint8).reshape(size, size, 3)
+        shape = img.shape
+        bigger = max(shape[0], shape[1])
+        if bigger > 200:
+            img = cv.resize(
+                img, ((int)(shape[1]*ratio), (int)(shape[0]*ratio)), interpolation=cv.INTER_LINEAR)
+            shape = img.shape
+        panH = 200-shape[0]
+        panH = (int)(panH/2)
+        panW = 200-shape[1]
+        panW = (int)(panW/2)
+        self._images.append(img)
+        self._labels.append(self._classess.index(label))
+        for h in range(shape[0]):
+            for w in range(shape[1]):
+                black_img[h+panH][w+panW] = img[h][w]
+        cv.imshow('black', black_img)
+        pan = (int)(panW/2)
+        left_img = cv.warpAffine(black_img, np.float32([[1, 0, -pan], [0, 1, 0]]), (size, size))
+        self._images.append(left_img)
+        self._labels.append(self._classess.index(label))
+        cv.imshow('left', left_img)
+        right_img = cv.warpAffine(black_img, np.float32([[1, 0, pan], [0, 1, 0]]), (size, size))
+        self._images.append(right_img)
+        self._labels.append(self._classess.index(label))
+        cv.imshow('right', right_img)
+        top_img = cv.warpAffine(black_img, np.float32([[1, 0, 0], [0, 1, -pan]]), (size, size))
+        self._images.append(top_img)
+        self._labels.append(self._classess.index(label))
+        cv.imshow('top', top_img)
+        bottom_img = cv.warpAffine(black_img, np.float32([[1, 0, pan], [0, 1, 0]]), (size, size))
+        self._images.append(bottom_img)
+        self._labels.append(self._classess.index(label))
+        cv.imshow('bottom', bottom_img)
+        cv.waitKey()
 
     def loadImageByTXT(self):
         for i in range(len(self._txtPath)):
@@ -69,7 +96,7 @@ class dataSet(object):
                 img = cv.resize(img, ((int)(shape[1]/2), (int)
                                       (shape[0]/2)), interpolation=cv.INTER_LINEAR)
                 lines = f.readlines()
-                cv.imshow('img', img)
+                # cv.imshow('img', img)
                 for line in lines:
                     line_dict = eval(line)
                     if self._bodyPos != None:
@@ -77,9 +104,16 @@ class dataSet(object):
                             continue
                     cut_img = cutImage(
                         img, line_dict['left'], line_dict['top'], line_dict['width'], line_dict['height'])
-                    self._images.append(cut_img)
-                    self._labels.append(
-                        self._classess.index(line_dict['status']))
+                    t = line_dict['status'][-5:]
+                    if line_dict['status'][-5:] != 'study':
+                        self.Expansion(cut_img, line_dict['status'])
+                    else:
+                        self._images.append(cut_img)
+                        self._labels.append(
+                            self._classess.index(line_dict['status']))
+                    # self._images.append(cut_img)
+                    # self._labels.append(
+                    #     self._classess.index(line_dict['status']))
                     # cv.imshow(str(line_dict['status']), cut_img)
                     # cv.waitKey()
                 del img
@@ -148,11 +182,19 @@ class dataSet(object):
 filePath = ['/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-05/2',
             '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2018-12-27/1',
             '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2018-12-27/2',
-            '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2018-12-27/3']
+            '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2018-12-27/3',
+            '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-17/1',
+            '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-17/2',
+            '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-05/修改间隔后/4',
+            '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-05/修改间隔后/5']
 txtPath = ['/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-05/body2',
            '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2018-12-27/body1',
            '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2018-12-27/body2',
-           '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2018-12-27/body3']
+           '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2018-12-27/body3',
+           '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-17/body1',
+           '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-17/body2',
+           '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-05/修改间隔后/body4',
+           '/Volumes/Seagate Backup Plus Drive/服务外包/picture/2019-03-05/修改间隔后/body5']
 
 
 classes = ['right_sleep', 'right_play_telephone', 'right_study',
