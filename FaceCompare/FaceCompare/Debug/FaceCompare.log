@@ -1,0 +1,4 @@
+﻿  FaceCompare.cpp
+\\mac\home\documents\visual studio 2015\projects\facecompare\facecompare\inc\arc\merror.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  FaceCompare.vcxproj -> \\Mac\Home\Documents\Visual Studio 2015\Projects\FaceCompare\Debug\FaceCompare.exe
+  FaceCompare.vcxproj -> \\Mac\Home\Documents\Visual Studio 2015\Projects\FaceCompare\Debug\FaceCompare.pdb (Full PDB)

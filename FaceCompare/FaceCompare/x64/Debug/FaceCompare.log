@@ -1,0 +1,18 @@
+﻿  FaceEngine.cpp
+\\mac\home\documents\visual studio 2015\projects\facecompare\facecompare\inc\arc\merror.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  FaceCompare.cpp
+\\mac\home\documents\visual studio 2015\projects\facecompare\facecompare\inc\arc\merror.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+  正在生成代码...
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFActivation，该符号在函数 "public: int __cdecl FaceEngine::InitEngine(void)" (?InitEngine@FaceEngine@@QEAAHXZ) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFInitEngine，该符号在函数 "public: int __cdecl FaceEngine::InitEngine(void)" (?InitEngine@FaceEngine@@QEAAHXZ) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFDetectFaces，该符号在函数 "public: int __cdecl FaceEngine::FaceDetection(struct ASF_MultiFaceInfo &,struct _IplImage *)" (?FaceDetection@FaceEngine@@QEAAHAEAUASF_MultiFaceInfo@@PEAU_IplImage@@@Z) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFProcess，该符号在函数 "public: int __cdecl FaceEngine::FaceASFProcess(struct ASF_MultiFaceInfo,struct _IplImage *)" (?FaceASFProcess@FaceEngine@@QEAAHUASF_MultiFaceInfo@@PEAU_IplImage@@@Z) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFUninitEngine，该符号在函数 "public: int __cdecl FaceEngine::UnInitEngine(void)" (?UnInitEngine@FaceEngine@@QEAAHXZ) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFGetVersion，该符号在函数 "public: struct ASF_VERSION const * __cdecl FaceEngine::GetVersion(void)" (?GetVersion@FaceEngine@@QEAAPEBUASF_VERSION@@XZ) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFFaceFeatureExtract，该符号在函数 "public: int __cdecl FaceEngine::ExtractFRFeature(struct ASF_MultiFaceInfo,struct ASF_FaceFeature &,struct _IplImage *)" (?ExtractFRFeature@FaceEngine@@QEAAHUASF_MultiFaceInfo@@AEAUASF_FaceFeature@@PEAU_IplImage@@@Z) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFFaceFeatureCompare，该符号在函数 "public: int __cdecl FaceEngine::FacePairMatching(float &,struct ASF_FaceFeature,struct ASF_FaceFeature)" (?FacePairMatching@FaceEngine@@QEAAHAEAMUASF_FaceFeature@@1@Z) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFGetAge，该符号在函数 "public: int __cdecl FaceEngine::AgeEstimation(struct ASF_MultiFaceInfo,struct _IplImage *,struct ASF_AgeInfo &)" (?AgeEstimation@FaceEngine@@QEAAHUASF_MultiFaceInfo@@PEAU_IplImage@@AEAUASF_AgeInfo@@@Z) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFGetGender，该符号在函数 "public: int __cdecl FaceEngine::GenderEstimation(struct ASF_MultiFaceInfo,struct _IplImage *,struct ASF_GenderInfo &)" (?GenderEstimation@FaceEngine@@QEAAHUASF_MultiFaceInfo@@PEAU_IplImage@@AEAUASF_GenderInfo@@@Z) 中被引用
+FaceEngine.obj : error LNK2019: 无法解析的外部符号 ASFGetFace3DAngle，该符号在函数 "public: int __cdecl FaceEngine::Face3DAngle(struct ASF_MultiFaceInfo,struct _IplImage *,struct ASF_Face3DAngle &)" (?Face3DAngle@FaceEngine@@QEAAHUASF_MultiFaceInfo@@PEAU_IplImage@@AEAUASF_Face3DAngle@@@Z) 中被引用
+.\lib\Arc\libarcsoft_face_engine.lib : warning LNK4272: 库计算机类型“X86”与目标计算机类型“x64”冲突
+\\Mac\Home\Documents\Visual Studio 2015\Projects\FaceCompare\x64\Debug\FaceCompare.exe : fatal error LNK1120: 11 个无法解析的外部命令
