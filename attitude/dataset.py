@@ -186,6 +186,25 @@ class dataSet(object):
         #     # img = list(img)
         #     cv.imshow(str(c), img)
         #     cv.waitKey()
+    def saveImage(self, filePath):
+        count_sleep = 0
+        count_telephone = 0
+        count_study = 0
+
+        for i in range(len(self._labels)):
+            if self._labels[i] == 0:
+                cv.imwrite(filePath+'\\sleep\\' +
+                           str(count_sleep), self._images[i])
+                count_sleep += 1
+            elif self._labels[i] == 1:
+                cv.imwrite(filePath+"\\telephone\\" +
+                           str(count_telephone), self._images[i])
+                count_telephone += 1
+            else:
+                cv.imwrite(filePath+"\\study\\" +
+                           str(count_study), self._images[i])
+                count_study += 1
+        
 
     def next_batch(self, batchSize):
         end = self._pointer + batchSize
