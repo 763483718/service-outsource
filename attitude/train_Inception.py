@@ -1,3 +1,9 @@
+
+'''
+    由于训练模型的大小超过了组委会对提交材料的要求，所以没有办法提交模型。
+
+    所以提交模型构建代码
+'''
 import tensorflow as tf
 import numpy as np
 import dataset

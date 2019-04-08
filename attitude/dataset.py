@@ -138,7 +138,8 @@ class dataSet(object):
                     label[index] = 1.0
 
                     if line_dict['status'][-5:] != 'study':
-                        self.Expansion(cut_img, label)
+                        pass
+                        # self.Expansion(cut_img, label)
                     else:
                         self.Expansion(cut_img, label, expansion=0)
                 del img

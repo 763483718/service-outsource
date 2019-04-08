@@ -143,7 +143,7 @@ pred_Y = tf.nn.softmax(out_layer, name='pred_Y')
 loss = tf.reduce_mean(
     tf.nn.softmax_cross_entropy_with_logits(labels=Y, logits=pred_Y))
 optimizer = tf.train.AdamOptimizer().minimize(loss)  # learning_rate=0.0001
-tf.concat
+
 temp = tf.equal(tf.arg_max(pred_Y, 1), tf.arg_max(Y, 1))
 accuracy = tf.reduce_mean(tf.cast(temp, tf.float32))
 print('开始加载训练数据集')
